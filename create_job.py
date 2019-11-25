@@ -36,6 +36,14 @@ def main(argv=None):
 	                    help='Dont use date/time in name')
 
 
+	parser.add_argument('--no-output', dest='use_out', action='store_false',
+	                    help='Dont log stdout')
+	parser.add_argument('--no-err', dest='use_err', action='store_false',
+	                    help='Dont log stderr')
+
+	# parser.add_argument('--output', type=str, )
+
+
 
 	parser.add_argument('--cpu', type=int, default=1,
 	                    help='number of cpus')
@@ -61,7 +69,10 @@ def main(argv=None):
 	parser.add_argument('--script', type=str, default=None,
 	                    help='path to sh script')
 	parser.add_argument('--redo', type=str, default=None,
-	                    help='path to change to before executing job')
+	                    help='path to a job dir or sh file to rerun')
+
+	parser.add_argument('--restart-after', type=float, default=None,
+	                    help='time in hours to wait before restarting job (to reset costs, good choices are 1-3)')
 
 	parser.add_argument('--dir', type=str, default=None,
 	                    help='path to change to before executing job')
@@ -152,17 +163,23 @@ on_exit_hold_reason = "Checkpointed, will resume"
 on_exit_hold_subcode = 2
 periodic_release = ( (JobStatus =?= 5) && (HoldReasonCode =?= 3) && (HoldReasonSubCode =?= 2) )''')
 
+	if args.restart_after is not None:
+		sub.append('''MaxTime = {}
+periodic_hold = (JobStatus =?= 2) && ((CurrentTime - JobCurrentStartDate) >= $(MaxTime))
+periodic_hold_reason = "Job runtime exceeded"
+periodic_hold_subcode = 1'''.format(int(args.restart_after*3600)))
+
 
 	sub.append(sub_fmt.format(exec=job_path,
-	                          err=os.path.join(path, 'out.txt'),
-	                          # err=os.path.join(path, 'err.txt'),
-	                          out=os.path.join(path, 'out.txt'),
+	                          err=os.path.join(path, 'out.txt') if args.use_out else '/tmp/null',
+	                          # err=os.path.join(path, 'err.txt') if args.use_err else '/tmp/null',
+	                          out=os.path.join(path, 'out.txt') if args.use_out else '/tmp/null',
 	                          log=os.path.join(path, 'log.txt'),
 	                          procs=args.replicas if args.replicas is not None else ''))
 
 
 
-	sub_path = os.path.join(path, 'job.sub')
+	sub_path = os.path.join(path, 'submit.sub')
 	with open(sub_path, 'w') as f:
 		f.write('\n'.join(sub))
 	# with open(os.path.join(os.environ['HOME'], 'job.sub'), 'w') as f:
