@@ -157,18 +157,17 @@ def main(argv=None):
 	if len(reqs):
 		sub.append('requirements = {}'.format(' && '.join('({})'.format(r) for r in reqs)))
 
-	# restart when command exits with 3
-	sub.append('''on_exit_hold = (ExitCode =?= 3)
-on_exit_hold_reason = "Checkpointed, will resume"
-on_exit_hold_subcode = 2
-periodic_release = ( (JobStatus =?= 5) && (HoldReasonCode =?= 3) && (HoldReasonSubCode =?= 2) )''')
-
 	if args.restart_after is not None:
 		sub.append('''MaxTime = {}
 periodic_hold = (JobStatus =?= 2) && ((CurrentTime - JobCurrentStartDate) >= $(MaxTime))
 periodic_hold_reason = "Job runtime exceeded"
-periodic_hold_subcode = 1'''.format(int(args.restart_after*3600)))
+periodic_hold_subcode = 1'''.format(int(args.restart_after * 3600)))
 
+	# restart when command exits with 3
+	sub.append('''on_exit_hold = (ExitCode =?= 3)
+on_exit_hold_reason = "Checkpointed, will resume"
+on_exit_hold_subcode = 2
+periodic_release = ( (JobStatus =?= 5) && (HoldReasonCode =?= 3) && ((HoldReasonSubCode =?= 2) || (HoldReasonSubCode =?= 2)) )''')
 
 	sub.append(sub_fmt.format(exec=job_path,
 	                          err=os.path.join(path, 'out.txt') if args.use_out else '/tmp/null',
