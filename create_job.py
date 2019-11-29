@@ -5,6 +5,9 @@ import re
 import argparse
 import pickle
 
+#python scripts/create_job.py --script /home/fleeb/scripts/run.sh --dir /home/fleeb/workspace/gh-projects/hybrid/ --gpu 1 --mem 40 --cpu 4 --faster --use-template --array --pull --gpu-names V100-32 V100-16 --bid 500
+
+
 sub_fmt = '''executable = /bin/sh
 args = {exec}
 getenv = True
@@ -28,6 +31,52 @@ GPU_NAMES = {
 	'P100': 'Tesla P100-PCIE-16GB',
 }
 
+job_template = '''
+#!/bin/sh
+
+export FOUNDATION_RUN_MODE="cluster"
+
+export FOUNDATION_SAVE_DIR="/home/fleeb/trained_nets/"
+export FOUNDATION_DATA_DIR="/home/fleeb/local_data/"
+
+export JOB_REGISTRY_PATH="/home/fleeb/registry.txt"
+
+export RESTART_AFTER="10"
+
+echo "-- starting job --"
+
+{}
+
+if [ $? -eq 3 ]
+then
+  echo "-- pausing for restart --"
+  exit 3
+fi
+
+echo "-- job complete --"
+'''
+
+git_dirs = [
+	'/home/fleeb/workspace/foundation',
+	'/home/fleeb/workspace/gh-projects/hybrid',
+	'/home/fleeb/workspace/humpack',
+]
+
+def write_job(cmds, path, name=None, cddir=None, tmpl=None):
+	with open(path, 'w') as f:
+		if name is not None:
+			f.write('\n# Job script for {}\n\n'.format(name))
+
+		if cddir is not None:
+			f.write('cd {}\n'.format(cddir))
+		if tmpl is None:
+			f.writelines(cmds)
+		else:
+			f.write(tmpl.format('\n'.join(cmds)))
+		f.write('\n')
+
+
+
 def main(argv=None):
 	parser = argparse.ArgumentParser(description='Create a submission script for the cluster')
 	parser.add_argument('--name', type=str, default=None,
@@ -35,11 +84,22 @@ def main(argv=None):
 	parser.add_argument('--no-date', dest='use_date', action='store_false',
 	                    help='Dont use date/time in name')
 
+	parser.add_argument('-i', '--interactive', action='store_true',
+	                    help='Make the job interactive.')
+
+
+	parser.add_argument('--pull', action='store_true',
+	                    help='Update git dir before submitting job/s')
+
+	parser.add_argument('--use-template', action='store_true',
+	                    help='Use local job template')
+	parser.add_argument('--array', action='store_true',
+	                    help='Treat commands as an array')
 
 	parser.add_argument('--no-output', dest='use_out', action='store_false',
 	                    help='Dont log stdout')
-	parser.add_argument('--no-err', dest='use_err', action='store_false',
-	                    help='Dont log stderr')
+	# parser.add_argument('--no-err', dest='use_err', action='store_false',
+	#                     help='Dont log stderr')
 
 	# parser.add_argument('--output', type=str, )
 
@@ -57,9 +117,9 @@ def main(argv=None):
 
 	parser.add_argument('--bid', type=int, default=None,
 	                    help='the bid (this automatically submits the job after prep)')
-
-	parser.add_argument('--replicas', type=int, default=None,
-	                    help='number of replicas')
+	#
+	# parser.add_argument('--replicas', type=int, default=None,
+	#                     help='number of replicas')
 
 	# parser.add_argument('--pass-path', action='store_true',
 	#                     help='pass job folder path to executable')
@@ -81,6 +141,9 @@ def main(argv=None):
 
 
 	args = parser.parse_args(argv)
+
+	if args.pull:
+		input('Have you pushed all changes?')
 
 	past_jobs = os.listdir(args.root)
 
@@ -112,22 +175,31 @@ def main(argv=None):
 
 	# elif args.cmd is not None: # create a new job file
 	else:
-		job_path = os.path.join(path, 'job.sh')
+
 
 		cmds = []
 		if args.script is not None:
 			with open(args.script, 'r') as f:
-				cmds.extend([l for l in f.readlines() if len(l) == 0 or l[0] != '#'])
+				cmds.extend([l for l in f.readlines() if len(l) > 1 and l[0] != '#'])
+				# print(cmds)
 		if args.cmd is not None:
 			cmds.append(args.cmd + '\n')
 		assert len(cmds)
 
-		with open(job_path, 'w') as f:
-			f.write('\n# Job script for {}\n\n'.format(args.name))
-			if args.dir is not None:
-				f.write('cd {}\n'.format(args.dir))
-			f.writelines(cmds)
-			f.write('\n')
+		if args.array:
+			print('Found {num} commands, will submit {num} replicas'.format(num=len(cmds)))
+			for i, cmd in enumerate(cmds):
+				jpath = os.path.join(path, 'job_{}.sh'.format(i))
+				write_job([cmd], jpath, name=args.name + ' - process: {}'.format(i), cddir=args.dir,
+				          tmpl=job_template if args.use_template else None)
+
+			job_path = os.path.join(path, 'job_$(Process).sh')
+			args.array = len(cmds)
+		else:
+			job_path = os.path.join(path, 'job.sh')
+
+			write_job(cmds, job_path, name=args.name, cddir=args.dir, tmpl=job_template if args.use_template else None)
+
 
 	# else:
 	# 	raise Exception('nothing to run')
@@ -146,6 +218,7 @@ def main(argv=None):
 		sub.append('request_gpus =  {}'.format(args.gpu))
 		if args.gpu_names is not None:
 			reqs.append(' || '.join('CUDADeviceName == \"{}\"'.format(GPU_NAMES[gname]) for gname in args.gpu_names))
+			print('Requiring: {}'.format(' or '.join(args.gpu_names)))
 		if args.fast:
 			print('Fast job')
 			reqs.append('CUDAGlobalMemoryMb > 10000')
@@ -167,14 +240,17 @@ periodic_hold_subcode = 1'''.format(int(args.restart_after * 3600)))
 	sub.append('''on_exit_hold = (ExitCode =?= 3)
 on_exit_hold_reason = "Checkpointed, will resume"
 on_exit_hold_subcode = 2
-periodic_release = ( (JobStatus =?= 5) && (HoldReasonCode =?= 3) && ((HoldReasonSubCode =?= 2) || (HoldReasonSubCode =?= 2)) )''')
+periodic_release = ( (JobStatus =?= 5) && (HoldReasonCode =?= 3) && ((HoldReasonSubCode =?= 1) || (HoldReasonSubCode =?= 2)) )''')
+
+	stdoutname = 'stdout-$(Process).txt' if args.array else 'stdout.txt'
+	logname = 'log-$(Process).txt' if args.array else 'log.txt'
 
 	sub.append(sub_fmt.format(exec=job_path,
-	                          err=os.path.join(path, 'out.txt') if args.use_out else '/tmp/null',
-	                          # err=os.path.join(path, 'err.txt') if args.use_err else '/tmp/null',
-	                          out=os.path.join(path, 'out.txt') if args.use_out else '/tmp/null',
-	                          log=os.path.join(path, 'log.txt'),
-	                          procs=args.replicas if args.replicas is not None else ''))
+	                          err=os.path.join(path, stdoutname) if args.use_out else '/tmp/null',
+	                          # err=os.path.join(path, 'stderr.txt') if args.use_err else '/tmp/null',
+	                          out=os.path.join(path, stdoutname) if args.use_out else '/tmp/null',
+	                          log=os.path.join(path, logname),
+	                          procs=args.array if args.array is not None else ''))
 
 
 
@@ -188,9 +264,15 @@ periodic_release = ( (JobStatus =?= 5) && (HoldReasonCode =?= 3) && ((HoldReason
 
 	print('Job {} prepared'.format(args.name))
 
+	if args.pull:
+
+		for gd in git_dirs:
+			os.system('cd {}; git pull'.format(gd))
+		# os.system('cd $HOME')
+
 	if args.bid is not None:
 
-		os.system('condor_submit_bid {bid} {job}'.format(bid=args.bid, job=sub_path))
+		os.system('condor_submit_bid {bid} {job}{i}'.format(bid=args.bid, job=sub_path, i=' -i' if args.interactive else ''))
 
 		print('Job submitted with a bid: {}'.format(args.bid))
 
