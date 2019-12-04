@@ -231,6 +231,7 @@
 #unbuffer python hybrid.py 3dshapes --name wae-lr4e-4-defbetas --optim.lr 4e-4 --optim.beta1 0.9 --optim.beta2 0.999 --model.gan_wt 0
 #
 #
+# 50
 #unbuffer python hybrid.py vae 3dshapes --name vae
 #
 #unbuffer python hybrid.py vae 3dshapes --name vae-defbetas --optim.beta1 0.9 --optim.beta2 0.999
@@ -238,7 +239,276 @@
 #unbuffer python hybrid.py vae 3dshapes --name vae-lr4e-4-defbetas --optim.lr 4e-4 --optim.beta1 0.9 --optim.beta2 0.999
 #
 #unbuffer python hybrid.py fvae 3dshapes --name fvae
-#
+##
 #unbuffer python hybrid.py factor 3dshapes --name fwae
+
+
+
+#unbuffer python hybrid.py 3dshapes --resume wpp-ganwt4_191129-174949 --extend 100
+#
+#
+#unbuffer python hybrid.py 3dshapes --resume wgan-step4_191129-174945 --extend 100
+#
+#
+#unbuffer python hybrid.py 3dshapes --resume wae_191129-174943 --extend 100
+#
+#unbuffer python hybrid.py 3dshapes --resume wae-defbetas_191129-174949 --extend 100
+#
+#unbuffer python hybrid.py 3dshapes --resume wae-lr4e-4-defbetas_191129-174944 --extend 100
+#
+#unbuffer python hybrid.py vae 3dshapes --resume vae_191202-110600 --extend 100
+#
+#unbuffer python hybrid.py vae 3dshapes --resume vae-defbetas_191202-110603 --extend 100
+#
+#unbuffer python hybrid.py vae 3dshapes --resume vae-lr4e-4-defbetas_191202-110608 --extend 100
+#
+#unbuffer python hybrid.py fvae 3dshapes --resume fvae_191202-110600 --extend 100
+##
+#unbuffer python hybrid.py factor 3dshapes --resume fwae_191202-110603 --extend 100
+
+
+### 54
+#unbuffer python hybrid.py new 3dshapes --name wgan --model.gan_wt 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-both-b1p5b2p9 --model.gan_wt 1 --optim.beta1 0.5 --optim.beta2 0.9
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-step8 --model.gan_wt 1 --model.disc_steps 8
+#
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr4e-4 --model.gan_wt 1 --optim.lr 4e-4 --model.discriminator.optim.lr 4e-4
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr2e-4 --model.gan_wt 1 --optim.lr 2e-4 --model.discriminator.optim.lr 2e-4
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr8e-4 --model.gan_wt 1 --optim.lr 8e-4 --model.discriminator.optim.lr 8e-4
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr1e-5 --model.gan_wt 1 --optim.lr 1e-5 --model.discriminator.optim.lr 1e-5
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr4e-5 --model.gan_wt 1 --optim.lr 4e-5 --model.discriminator.optim.lr 4e-5
+
+
+### 55
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr4e-4-both-b1p5b2p9 --model.gan_wt 1 --optim.beta1 0.5 --optim.beta2 0.9 --optim.lr 4e-4 --model.discriminator.optim.lr 4e-4
+#
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr1e-4-disclr3x --model.gan_wt 1 --optim.lr 1e-4 --model.discriminator.optim.lr 3e-4 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr1e-4-disclr5x --model.gan_wt 1 --optim.lr 1e-4 --model.discriminator.optim.lr 5e-4 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr1e-4-disclr8x --model.gan_wt 1 --optim.lr 1e-4 --model.discriminator.optim.lr 8e-4 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr1e-4-disclr10x --model.gan_wt 1 --optim.lr 1e-4 --model.discriminator.optim.lr 1e-3 --model.disc_steps 1
+#
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr2e-4-disclr3x --model.gan_wt 1 --optim.lr 2e-4 --model.discriminator.optim.lr 6e-4 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr4e-4-disclr3x --model.gan_wt 1 --optim.lr 4e-4 --model.discriminator.optim.lr 1.2e-3 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr2e-4-disclr5x --model.gan_wt 1 --optim.lr 2e-4 --model.discriminator.optim.lr 1e-3 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr4e-4-disclr5x --model.gan_wt 1 --optim.lr 4e-4 --model.discriminator.optim.lr 2e-3 --model.disc_steps 1
+
+
+### 56
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr4e-4-disclr10x --model.gan_wt 1 --optim.lr 4e-4 --model.discriminator.optim.lr 4e-3 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr4e-4-disclr8x --model.gan_wt 1 --optim.lr 4e-4 --model.discriminator.optim.lr 3.2e-3 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr8e-4-disclr5x --model.gan_wt 1 --optim.lr 8e-4 --model.discriminator.optim.lr 4e-3 --model.disc_steps 1
+#
+#unbuffer python hybrid.py new 3dshapes --name wgan-lr1e-3-disclr5x --model.gan_wt 1 --optim.lr 1e-3 --model.discriminator.optim.lr 5e-3 --model.disc_steps 1
+
+### 57
+#unbuffer python hybrid.py new 3dshapes --resume wgan-lr4e-4-disclr10x_191203-150839 --extend 100
+#
+#unbuffer python hybrid.py new 3dshapes --resume wgan-lr1e-3-disclr5x_191203-150819 --extend 100
+#
+#unbuffer python hybrid.py new 3dshapes --resume wgan-lr4e-4-disclr8x_191203-150820 --extend 100
+
+### 58
+#unbuffer python hybrid.py new 3dshapes --resume wgan-lr8e-4-disclr5x_191203-150821 --extend 100
+
+
+
+unbuffer python hybrid.py 3dshapes --name wae --model.gan_wt 0
+
+
+unbuffer python hybrid.py vae 3dshapes --name vaep01 --model.gan_wt 0 --model.latent_reg_wt 0.01
+
+unbuffer python hybrid.py vae 3dshapes --name vaep1 --model.gan_wt 0 --model.latent_reg_wt 0.1
+
+unbuffer python hybrid.py vae 3dshapes --name vaep2 --model.gan_wt 0 --model.latent_reg_wt .2
+
+unbuffer python hybrid.py vae 3dshapes --name vaep5 --model.gan_wt 0 --model.latent_reg_wt .5
+
+unbuffer python hybrid.py vae 3dshapes --name vae --model.gan_wt 0 --model.latent_reg_wt 1
+
+unbuffer python hybrid.py vae 3dshapes --name vae2 --model.gan_wt 0 --model.latent_reg_wt 2
+
+unbuffer python hybrid.py vae 3dshapes --name vae4 --model.gan_wt 0 --model.latent_reg_wt 4
+
+
+unbuffer python hybrid.py vae 3dshapes --name vae-adamp5p9 --model.gan_wt 0 --model.beta1 0.5 --model.beta2 0.9
+
+unbuffer python hybrid.py 3dshapes --name wae-adamp5p9 --model.gan_wt 0 --model.beta1 0.5 --model.beta2 0.9
+
+unbuffer python hybrid.py vae 3dshapes --name vae-adamp5p999 --model.gan_wt 0 --model.beta1 0.5 --model.beta2 0.999
+
+unbuffer python hybrid.py 3dshapes --name wae-adamp5p999 --model.gan_wt 0 --model.beta1 0.5 --model.beta2 0.999
+
+unbuffer python hybrid.py 3dshapes --name wae-lr5e-4 --model.gan_wt 0 model.lr 5e-4
+
+unbuffer python hybrid.py 3dshapes --name wae-lr2e-3 --model.gan_wt 0 model.lr 2e-3
+
+
+unbuffer python hybrid.py plateau 3dshapes --name wae-plat --model.gan_wt 0
+
+unbuffer python hybrid.py plateau vae 3dshapes --name vae-plat --model.gan_wt 0 --model.latent_reg_wt 1
+
+unbuffer python hybrid.py plateau vae 3dshapes --name vaep5-plat --model.gan_wt 0 --model.latent_reg_wt .5
+
+unbuffer python hybrid.py plateau vae 3dshapes --name vaep1-plat --model.gan_wt 0 --model.latent_reg_wt .1
+
+
+
+unbuffer python hybrid.py 3dshapes --name gan --model.gan_wt 1
+
+unbuffer python hybrid.py 3dshapes --name gan-adamp5p999 --model.gan_wt 1 --model.beta1 0.5 --model.beta2 0.999
+
+unbuffer python hybrid.py 3dshapes --name gan-adamp5p9 --model.gan_wt 1 --model.beta1 0.5 --model.beta2 0.9
+
+unbuffer python hybrid.py 3dshapes --name gan-lrp5e-4 --model.gan_wt 1 --model.discriminator.lr 2.5e-3 --model.lr 5e-4
+
+unbuffer python hybrid.py 3dshapes --name gan-disclr3x --model.gan_wt 1 --model.discriminator.lr 3e-3
+
+unbuffer python hybrid.py 3dshapes --name gan-disclr8x --model.gan_wt 1 --model.discriminator.lr 8e-3
+
+unbuffer python hybrid.py 3dshapes --name gan-disclr10x --model.gan_wt 1 --model.discriminator.lr 1e-2
+
+unbuffer python hybrid.py 3dshapes --name gan-lrstep40 --model.gan_wt 1 --model.scheduler_step 40
+
+unbuffer python hybrid.py plateau 3dshapes --name gan-plat --model.gan_wt 1
+
+unbuffer python hybrid.py 3dshapes --name gan-nolrdecay --model.gan_wt 1 --model.scheduler_type _x_
+
+unbuffer python hybrid.py 3dshapes --name gan-disclr8x-nolrdecay --model.gan_wt 1 --model.discriminator.lr 8e-3 --model.scheduler_type _x_
+
+unbuffer python hybrid.py 3dshapes --name gan-disclr10x-nolrdecay --model.gan_wt 1 --model.discriminator.lr 1e-2 --model.scheduler_type _x_
+
+
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-5 --model.gan_wt 1e-5
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-4 --model.gan_wt 1e-4
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-3 --model.gan_wt 1e-3
+
+
+unbuffer python hybrid.py plateau 3dshapes --name wpp1e-4 --model.gan_wt 1e-4
+
+unbuffer python hybrid.py plateau 3dshapes --name wpp5e-5 --model.gan_wt 5e-5
+
+unbuffer python hybrid.py plateau 3dshapes --name wpp2e-4 --model.gan_wt 2e-4
+
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-4-adamp5p999 --model.gan_wt 1e-4 --model.beta1 0.5 --model.beta2 0.999
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-4-adamp5p9 --model.gan_wt 1e-4 --model.beta1 0.5 --model.beta2 0.9
+
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-4-warm40 --model.gan_wt 1e-4 --model.gan_warm_start 40
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-4-warm20 --model.gan_wt 1e-4 --model.gan_warm_start 20
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-4-warm10 --model.gan_wt 1e-4 --model.gan_warm_start 10
+
+unbuffer python hybrid.py 3dshapes --name wpp1e-4-warm4 --model.gan_wt 1e-4 --model.gan_warm_start 4
+
+
+
+unbuffer python hybrid.py factor 3dshapes --name fwae
+
+unbuffer python hybrid.py factor 3dshapes --name fwae-priorp2 --model.reg_prior 0.2
+
+unbuffer python hybrid.py factor 3dshapes --name fwae-priorp4 --model.reg_prior 0.4
+
+
+unbuffer python hybrid.py factor 3dshapes --name fwae-gan1e-4 --model.gan_wt 1e-4
+
+unbuffer python hybrid.py factor 3dshapes --name fwae-gan1e-4-priorp2 --model.gan_wt 1e-4 --model.reg_prior 0.2
+
+unbuffer python hybrid.py factor 3dshapes --name fwae-gan1e-4-warm10 --model.gan_wt 1e-4 --model.gan_warm_start 10
+
+
+unbuffer python hybrid.py fvae 3dshapes --name fvae --model.gan_wt 0 --model.latent_reg_wt 1
+
+unbuffer python hybrid.py fvae 3dshapes --name fvae2 --model.gan_wt 0 --model.latent_reg_wt 2
+
+unbuffer python hybrid.py fvae 3dshapes --name fbvaep2 --model.gan_wt 0 --model.latent_reg_wt .2
+
+unbuffer python hybrid.py fvae 3dshapes --name fbvaep1 --model.gan_wt 0 --model.latent_reg_wt .1
+
+unbuffer python hybrid.py fvae 3dshapes --name fbvaep01 --model.gan_wt 0 --model.latent_reg_wt .01
+
+
+
+unbuffer python hybrid.py dropin 3dshapes --name dwae1e-5 --model.gan_wt 1e-5
+
+unbuffer python hybrid.py dropin 3dshapes --name dwae1e-4 --model.gan_wt 1e-4
+
+unbuffer python hybrid.py dropin 3dshapes --name dwae1e-3 --model.gan_wt 1e-3
+
+unbuffer python hybrid.py dropin 3dshapes --name dwae1e-4-warm10 --model.gan_wt 1e-4 --model.gan_warm_start 10
+
+unbuffer python hybrid.py dropin 3dshapes --name dwae1e-4-warm4 --model.gan_wt 1e-4 --model.gan_warm_start 4
+
+
+unbuffer python hybrid.py dropin_vae 3dshapes --name dvae1e-4 --model.gan_wt 1e-4
+
+unbuffer python hybrid.py dropin_vae 3dshapes --name dvae1e-4-warm10 --model.gan_wt 1e-4 --model.gan_warm_start 10
+
+unbuffer python hybrid.py dropin_vae 3dshapes --name dvae1e-4-warm4 --model.gan_wt 1e-4 --model.gan_warm_start 4
+
+
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-4-probp5 --model.gan_wt 1e-4 --model.prob 0.5
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-4-probp5-priorp2 --model.gan_wt 1e-4 --model.prob 0.5 --model.reg_prior 0.2
+
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-4 --model.gan_wt 1e-4
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-4-priorp2 --model.gan_wt 1e-4 --model.reg_prior 0.2
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-3 --model.gan_wt 1e-3
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-3-priorp2 --model.gan_wt 1e-3 --model.reg_prior 0.2
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-5 --model.gan_wt 1e-5
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-5-priorp2 --model.gan_wt 1e-5 --model.reg_prior 0.2
+
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-4-warm10 --model.gan_wt 1e-4 --model.gan_warm_start 10
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-4-priorp2-warm10 --model.gan_wt 1e-4 --model.reg_prior 0.2 --model.gan_warm_start 10
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-4-warm4 --model.gan_wt 1e-4 --model.gan_warm_start 4
+
+unbuffer python hybrid.py dropin_factor 3dshapes --name fdwae1e-4-priorp2-warm4 --model.gan_wt 1e-4 --model.reg_prior 0.2 --model.gan_warm_start 4
+
+
+unbuffer python hybrid.py dropin_factor_vae 3dshapes --name fdvae1e-4 --model.gan_wt 1e-4
+
+unbuffer python hybrid.py dropin_factor_vae 3dshapes --name fdvae1e-4-priorp2 --model.gan_wt 1e-4 --model.reg_prior 0.2
+
+unbuffer python hybrid.py dropin_factor_vae 3dshapes --name fdvae1e-4-warm10 --model.gan_wt 1e-4 --model.gan_warm_start 10
+
+unbuffer python hybrid.py dropin_factor_vae 3dshapes --name fdvae1e-4-priorp2-warm10 --model.gan_wt 1e-4 --model.reg_prior 0.2 --model.gan_warm_start 10
+
+unbuffer python hybrid.py dropin_factor_vae 3dshapes --name fdvae1e-4-warm4 --model.gan_wt 1e-4 --model.gan_warm_start 4
+
+unbuffer python hybrid.py dropin_factor_vae 3dshapes --name fdvae1e-4-priorp2-warm4 --model.gan_wt 1e-4 --model.reg_prior 0.2 --model.gan_warm_start 4
+
+
 
 
