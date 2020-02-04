@@ -46,31 +46,43 @@ GPU_NAMES = {
 	'P100': 'Tesla P100-PCIE-16GB',
 }
 
-job_template = '''
-#!/bin/sh
-
-export FOUNDATION_RUN_MODE="cluster"
-
-export FOUNDATION_SAVE_DIR="/home/fleeb/trained_nets/"
-export FOUNDATION_DATA_DIR="/home/fleeb/local_data/"
-export FOUNDATION_TESTING="0"
-
-export JOB_REGISTRY_PATH="/home/fleeb/registry.txt"
-
-export RESTART_AFTER="10"
-
-echo "-- starting job --"
-
-{}
-
-if [ $? -eq 3 ]
-then
-  echo "-- pausing for restart --"
-  exit 3
-fi
-
-echo "-- job complete --"
-'''
+# job_template = '''
+# #!/bin/sh
+#
+# export FOUNDATION_RUN_MODE="cluster"
+#
+# export FOUNDATION_SAVE_DIR="/home/fleeb/trained_nets/"
+# export FOUNDATION_DATA_DIR="/home/fleeb/local_data/"
+# export FOUNDATION_TESTING="0"
+#
+# export JOB_REGISTRY_PATH="/home/fleeb/registry.txt"
+#
+# export RESTART_AFTER="10"
+#
+# echo "-- starting job --"
+#
+# nvidia-smi
+#
+# {}
+#
+# CODE=$?
+#
+# echo "CODE"
+# echo $CODE
+#
+# if [ $CODE -eq 3 ]
+# then
+#   echo "-- pausing for restart --"
+#   exit 3
+# fi
+#
+# echo "DEVICE"
+# echo $CUDA_VISIBLE_DEVICES
+#
+# nvidia-smi
+#
+# echo "-- job complete --"
+# '''
 
 git_dirs = [
 	'/home/fleeb/workspace/foundation',
@@ -88,7 +100,9 @@ def write_job(cmds, path, name=None, cddir=None, tmpl=None):
 		if tmpl is None:
 			f.writelines(cmds)
 		else:
-			f.write(tmpl.format('\n'.join(cmds)))
+			sub = '\n'.join(cmds)
+			full = tmpl.format(sub)
+			f.write(full)
 		f.write('\n')
 
 
@@ -107,8 +121,12 @@ def main(argv=None):
 	parser.add_argument('--pull', action='store_true',
 	                    help='Update git dir before submitting job/s')
 
-	parser.add_argument('--use-template', action='store_true',
-	                    help='Use local job template')
+	# parser.add_argument('--use-template', action='store_true',
+	#                     help='Use local job template')
+
+	parser.add_argument('--template', type=str, default=None,
+	                    help='path to a job template (must have exactly one pair of braces (ie. {}) to insert command')
+
 	parser.add_argument('--array', action='store_true',
 	                    help='Treat commands as an array')
 
@@ -129,7 +147,11 @@ def main(argv=None):
 	                    help='number of cpus')
 	parser.add_argument('--fast', action='store_true')
 	parser.add_argument('--faster', action='store_true')
-	parser.add_argument('--gpu-names', type=str, nargs='+', default=None)
+	parser.add_argument('--gpu-names', type=str, nargs='+', default=None,
+	                    help='specific kinds of gpus that should be used (see GPU_NAMES table)')
+
+	parser.add_argument('--avoid', type=str, nargs='+', default=[],
+	                    help='specific node names that should not be used')
 
 	parser.add_argument('--bid', type=int, default=None,
 	                    help='the bid (this automatically submits the job after prep)')
@@ -202,19 +224,24 @@ def main(argv=None):
 			cmds.append(args.cmd + '\n')
 		assert len(cmds)
 
+		job_template = '{}'
+		if args.template is not None:
+			with open(args.template, 'r') as f:
+				job_template = f.read()
+
 		if args.array:
 			print('Found {num} commands, will submit {num} replicas'.format(num=len(cmds)))
 			for i, cmd in enumerate(cmds):
 				jpath = os.path.join(path, 'job_{}.sh'.format(i))
 				write_job([cmd], jpath, name=args.name + ' - process: {}'.format(i), cddir=args.dir,
-				          tmpl=job_template if args.use_template else None)
+				          tmpl=job_template)
 
 			job_path = os.path.join(path, 'job_$(Process).sh')
 			args.array = len(cmds)
 		else:
 			job_path = os.path.join(path, 'job.sh')
 
-			write_job(cmds, job_path, name=args.name, cddir=args.dir, tmpl=job_template if args.use_template else None)
+			write_job(cmds, job_path, name=args.name, cddir=args.dir, tmpl=job_template)
 
 
 	# else:
@@ -241,7 +268,16 @@ def main(argv=None):
 		if args.faster:
 			print('Faster job')
 			reqs.append('CUDAGlobalMemoryMb > 15000')
+	else:
+		print('WARNING: if you are using the template, check that nvidia-smi doesnt get run after the job is complete')
 
+
+
+	# print('WARNING: avoiding all "p" nodes')
+	# args.avoid.extend(['p001', 'p002', 'p003', 'p004'])
+
+	if args.avoid is not None and len(args.avoid):
+		reqs.extend('Target.Machine != "{}.internal.cluster.is.localnet"'.format(n) for n in args.avoid)
 
 	if len(reqs):
 		sub.append('requirements = {}'.format(' && '.join('({})'.format(r) for r in reqs)))
