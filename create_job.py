@@ -46,44 +46,6 @@ GPU_NAMES = {
 	'P100': 'Tesla P100-PCIE-16GB',
 }
 
-# job_template = '''
-# #!/bin/sh
-#
-# export FOUNDATION_RUN_MODE="cluster"
-#
-# export FOUNDATION_SAVE_DIR="/home/fleeb/trained_nets/"
-# export FOUNDATION_DATA_DIR="/home/fleeb/local_data/"
-# export FOUNDATION_TESTING="0"
-#
-# export JOB_REGISTRY_PATH="/home/fleeb/registry.txt"
-#
-# export RESTART_AFTER="10"
-#
-# echo "-- starting job --"
-#
-# nvidia-smi
-#
-# {}
-#
-# CODE=$?
-#
-# echo "CODE"
-# echo $CODE
-#
-# if [ $CODE -eq 3 ]
-# then
-#   echo "-- pausing for restart --"
-#   exit 3
-# fi
-#
-# echo "DEVICE"
-# echo $CUDA_VISIBLE_DEVICES
-#
-# nvidia-smi
-#
-# echo "-- job complete --"
-# '''
-
 git_dirs = [
 	'/home/fleeb/workspace/foundation',
 	'/home/fleeb/workspace/gh-projects/hybrid',
@@ -107,7 +69,7 @@ def write_job(cmds, path, name=None, cddir=None, tmpl=None):
 
 
 
-def main(argv=None):
+def main(argv=None): # python scripts/create_job.py --script /home/fleeb/scripts/run.sh --template /home/fleeb/scripts/template.sh --dir /home/fleeb/workspace/gh-projects/hybrid/ --gpu 1 --mem 64 --cpu 4 --array --pull --gpu-names V100-32 --bid 1800 --avoid g048
 	parser = argparse.ArgumentParser(description='Create a submission script for the cluster')
 	parser.add_argument('--name', type=str, default=None,
 	                    help='Name of job')

@@ -1,4 +1,3 @@
-#!/bin/sh
 
 export FOUNDATION_RUN_MODE="cluster"
 
@@ -18,18 +17,18 @@ echo "-- starting job --"
 
 CODE=$?
 
-echo "CODE"
-echo $CODE
+#echo "CODE"
+#echo $CODE
 
 if [ $CODE -eq 3 ]
 then
   echo "-- pausing for restart --"
   exit 3
 fi
-
-echo "DEVICE"
-echo $CUDA_VISIBLE_DEVICES
-
-nvidia-smi
+#
+#echo "DEVICE"
+#echo $CUDA_VISIBLE_DEVICES
+#
+#nvidia-smi
 
 echo "-- job complete --"

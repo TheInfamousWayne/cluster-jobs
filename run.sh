@@ -2469,9 +2469,81 @@
 #unbuffer python main_eval_final.py nocap2cap-dae_0099-6052165-01_200203-161022 /home/fleeb/results/final
 
 
-###
+### 110-111
+
+#unbuffer python main_eval_final.py 3dshapes-ae_0088-6051613-00_200203-121509 /home/fleeb/results/final
+#unbuffer python main_eval_final.py 3dshapes-ae_0088-6051613-01_200203-121510 /home/fleeb/results/final
+#unbuffer python main_eval_final.py 3dshapes-ae_0088-6051613-02_200203-121541 /home/fleeb/results/final
+#unbuffer python main_eval_final.py 3dshapes-ae_0088-6051613-03_200203-121549 /home/fleeb/results/final
+#unbuffer python main_eval_final.py 3dshapes-ae_0088-6051613-04_200203-121517 /home/fleeb/results/final
 
 
+### 112-113
+
+#unbuffer python main_eval_final.py box-ae_0045-6049543-00_200131-224504 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-wae_0045-6049543-01_200131-224627 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-vae_0045-6049543-02_200131-224505 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-vae_0045-6049543-03_200131-224730 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-fae_0045-6049543-04_200131-224753 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-dae_0045-6049543-05_200131-224815 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-fwae_0045-6049543-06_200131-224815 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-fvae_0045-6049543-07_200131-224928 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s1-ae_0047-6049598-01_200201-051024 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s1-wae_0047-6049598-02_200201-050901 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s1-vae_0047-6049598-03_200201-050901 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s1-vae_0047-6049598-04_200201-051000 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s1-fae_0047-6049598-05_200201-051332 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s1-fwae_0047-6049598-06_200201-051258 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s1-fvae_0047-6049598-07_200201-051256 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s2-ae_0060-6050841-00_200202-182231 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s2-wae_0060-6050841-01_200202-182239 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s2-vae_0060-6050841-02_200202-182230 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s2-vae_0060-6050841-03_200202-182238 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s2-fae_0060-6050841-04_200202-182235 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s2-fwae_0060-6050841-05_200202-182403 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s2-fvae_0060-6050841-06_200202-182237 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s1-dae_0067-6051161-00_200202-194435 /home/fleeb/results/final
+#unbuffer python main_eval_final.py nocap-ae_0071-6051168-00_200202-201832 /home/fleeb/results/final
+#unbuffer python main_eval_final.py nocap-wae_0071-6051168-01_200202-201830 /home/fleeb/results/final
+#unbuffer python main_eval_final.py nocap-vae_0071-6051168-02_200202-201832 /home/fleeb/results/final
+#unbuffer python main_eval_final.py nocap-vae_0071-6051168-03_200202-201833 /home/fleeb/results/final
+#unbuffer python main_eval_final.py nocap-fae_0071-6051168-04_200202-201833 /home/fleeb/results/final
+#unbuffer python main_eval_final.py nocap-dae_0071-6051168-05_200202-201834 /home/fleeb/results/final
+#unbuffer python main_eval_final.py nocap-fwae_0071-6051168-06_200202-201831 /home/fleeb/results/final
+#unbuffer python main_eval_final.py nocap-fvae_0071-6051168-07_200202-202001 /home/fleeb/results/final
+#unbuffer python main_eval_final.py box-s2-dae_0076-6051205-00_200202-230703 /home/fleeb/results/final
+
+### 114-115
+
+#unbuffer python main_eval_final.py pacman-ae_0096-6051995-00_200203-153008 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-wae_0096-6051995-01_200203-152924 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-fdwae_0096-6051995-10_200203-152919 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-fdwae_0096-6051995-11_200203-152950 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-vae_0096-6051995-02_200203-152918 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-vae_0096-6051995-04_200203-152919 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-fwae_0096-6051995-05_200203-152918 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-fwae_0096-6051995-06_200203-152918 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-dvae_0096-6051995-08_200203-152935 /home/fleeb/results/final
+#unbuffer python main_eval_final.py pacman-dwae_0096-6051995-09_200203-152918 /home/fleeb/results/final
+
+### 116
+
+#unbuffer python main_eval_final.py celeba-fae_0103-6052317-00_200203-204149 /home/fleeb/results/final
+#unbuffer python main_eval_final.py celeba-dae_0103-6052317-01_200203-204150 /home/fleeb/results/final
+#unbuffer python main_eval_final.py celeba-fdwae_0051-6050322-11_200201-212849 /home/fleeb/results/final
+#unbuffer python main_eval_final.py celeba-dwae_0051-6050322-09_200201-212721 /home/fleeb/results/final
+
+
+### 117
+
+#unbuffer python main_eval_final.py spaceinv-ae_0064-6050849-00_200202-183950 /home/fleeb/results/final
+#unbuffer python main_eval_final.py spaceinv-fdwae_0064-6050849-10_200202-190944 /home/fleeb/results/final
+#unbuffer python main_eval_final.py spaceinv-fdwae_0064-6050849-11_200202-190944 /home/fleeb/results/final
+#unbuffer python main_eval_final.py spaceinv-vae_0064-6050849-02_200202-190121 /home/fleeb/results/final
+#unbuffer python main_eval_final.py spaceinv-vae_0064-6050849-04_200202-190736 /home/fleeb/results/final
+#unbuffer python main_eval_final.py spaceinv-fwae_0064-6050849-06_200202-191020 /home/fleeb/results/final
+#unbuffer python main_eval_final.py spaceinv-dvae_0064-6050849-08_200202-190947 /home/fleeb/results/final
+#unbuffer python main_eval_final.py spaceinv-dwae_0064-6050849-09_200202-190951 /home/fleeb/results/final
 
 
 
@@ -2572,7 +2644,45 @@
 
 
 
-
+#final_jobs = {
+#    'box-s3': {'ae':'74-0', 'wae':'74-1', 'vae':'74-2', 'bvae':'74-3', 'fae':'74-4', 'fwae':'74-5',
+#               'fvae':'74-6', 'dae':'79-1', },
+#    'nocap2cap': {'ae':'86-0', 'wae':'86-1', 'vae':'86-2', 'bvae':'86-3', 'fae':'99-0', 'dae':'99-1',
+#                  'fwae':'86-4', 'fvae':'86-5', },
+#    'spaceinv': {'wae':'64-1', '4vae':'64-3', 'fwae':'64-5', 'fvae':'64-7', 'ae':'64-0', 'vae':'64-2',
+#                 '16vae':'64-4', 'fwaes':'64-6', 'fdwaes':'64-11', 'fdwae':'64-10', 'dvae':'64-8', 'dwae':'64-9'},
+#    '3dshapes': {'ae':'30-0','wae':'28-1', 'vae':'28-2', 'bvae':'28-3', 'fae':'31-0', 'dae':'30-2',
+#                 'fwae':'28-5', 'fvae':'29-6'},
+#    '3dshapes-adain': {'ae':'35-2','wae':'35-3','vae':'35-4','bvae':'35-5','dae':'35-6','fwae':'35-7','fvae':'35-8'},
+#    'celeba': {'ae':'51-0','wae':'51-1','vae':'51-2','4vae':'51-3','16vae':'51-4','fwae':'51-5',
+#               'fwaes':'51-6', 'fvae':'51-7', 'dae':'103-1', 'fae':'103-0', 'dwae':'51-9',
+#               'fdwae':'51-10', 'fdwae.1':'51-11'},
+#    'celeba-adain': {'ae':'55-0', 'wae':'55-1', 'fwae':'55-5', 'fwaes':'55-6'},
+#    'mpi-toy': {'ae':'58-0','wae':'58-1','vae':'58-2', '4vae':'58-3', '16vae':'58-4',
+#                'fwae':'58-5', 'fwaes':'58-6', 'fdwae':'58-10', 'dvae':'58-8'},
+#    'mpi-toy-adain': {'ae':'80-0', 'wae':'80-1', 'vae':'80-2', '4vae':'80-3', '16vae':'80-4', 'fwae':'80-5',
+#                      'fvae':'80-7', },# '80-10'
+#    'mpi-real': {'ae':'72-0', 'wae':'72-1', 'vae':'72-2', '4vae':'72-3', '16vae':'72-4', 'fwae':'72-5',
+#                 'fwaes':'72-6', 'fvae':'72-7'},
+#    'mpi-realistic': { 'wae':'78-1', 'vae':'78-2', '4vae':'78-3', '16vae':'78-4', 'fwae':'78-5',
+#                      'fwaes':'78-6', 'fvae':'78-7'},# '78-0',
+#
+#    'arch': {'reg':'30-0', 's2-d4':'35-2', 's3-d0':'88-0', 's1-d8':'88-1', 's2-d4(2)':'88-2',
+#             's1-d0':'88-3', 's1-d2':'88-4'},
+#
+#    'box': {'ae':'45-0',  'wae':'45-1', 'vae':'45-2', '4vae':'45-3', 'fae':'45-4', 'dae':'45-5',
+#            'fwae':'45-6', 'fvae':'45-7'},
+#    'box-s1': {'ae':'47-1', 'wae':'47-2', 'vae':'47-3', '4vae':'47-4', 'fae':'47-5', 'dae':'67-0',
+#               'fwae':'47-6', 'fvae':'47-7'},
+#    'box-s2': {'ae':'60-0', 'wae':'60-1', 'vae':'60-2', '4vae':'60-3', 'fae':'60-4',  'dae':'76-0',
+#               'fwae':'60-5', 'fvae':'60-6'},
+#
+#    'nocap': {'ae':'71-0', 'wae':'71-1', 'vae':'71-2', '4vae':'71-3', 'fae':'71-4', 'dae':'71-5',
+#              'fwae':'71-6', 'fvae':'71-7'},
+#
+#    'pacman': {'ae':'96-0', 'wae':'96-1', 'vae':'96-2', '16vae':'96-4','fwae':'96-5', 'fwaes':'96-6',
+#               'dvae':'96-8', 'dwae':'96-9', 'fdwae':'96-10', 'fdwae.1':'96-11'},
+#}
 
 
 
