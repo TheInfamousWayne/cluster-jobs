@@ -7,6 +7,7 @@ import pickle
 
 #python scripts/create_job.py --script /home/fleeb/scripts/run.sh --dir /home/fleeb/workspace/gh-projects/hybrid/ --gpu 1 --mem 40 --cpu 4 --faster --use-template --array --pull --gpu-names V100-32 V100-16 --bid 500
 
+# conda install -c eumetsat expect
 
 sub_fmt = '''executable = /bin/sh
 args = {exec}
@@ -48,8 +49,9 @@ GPU_NAMES = {
 
 git_dirs = [
 	'/home/fleeb/workspace/foundation',
-	'/home/fleeb/workspace/gh-projects/hybrid',
+	# '/home/fleeb/workspace/gh-projects/hybrid',
 	'/home/fleeb/workspace/humpack',
+	'/home/fleeb/workspace/learn_rep'
 ]
 
 def write_job(cmds, path, name=None, cddir=None, tmpl=None):
@@ -117,12 +119,6 @@ def main(argv=None): # python scripts/create_job.py --script /home/fleeb/scripts
 
 	parser.add_argument('--bid', type=int, default=None,
 	                    help='the bid (this automatically submits the job after prep)')
-	#
-	# parser.add_argument('--replicas', type=int, default=None,
-	#                     help='number of replicas')
-
-	# parser.add_argument('--pass-path', action='store_true',
-	#                     help='pass job folder path to executable')
 
 	parser.add_argument('--cmd', type=str, default=None,
 	                    help='executable command')
