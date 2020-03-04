@@ -1,11 +1,10 @@
-
 import sys, os
 import time
 import re
 import argparse
 import pickle
 
-#python scripts/create_job.py --script /home/fleeb/scripts/run.sh --dir /home/fleeb/workspace/gh-projects/hybrid/ --gpu 1 --mem 40 --cpu 4 --faster --use-template --array --pull --gpu-names V100-32 V100-16 --bid 500
+#python scripts/create_job.py --script /home/vagrawal/scripts/run.sh --dir /home/vagrawal/workspace/gh-projects/hybrid/ --gpu 1 --mem 40 --cpu 4 --faster --use-template --array --pull --gpu-names V100-32 V100-16 --bid 500
 
 # conda install -c eumetsat expect
 
@@ -48,10 +47,10 @@ GPU_NAMES = {
 }
 
 git_dirs = [
-	'/home/fleeb/workspace/foundation',
-	# '/home/fleeb/workspace/gh-projects/hybrid',
-	'/home/fleeb/workspace/humpack',
-	'/home/fleeb/workspace/learn_rep'
+	'/home/vagrawal/workspace/foundation',
+	# '/home/vagrawal/workspace/gh-projects/hybrid',
+	'/home/vagrawal/workspace/humpack',
+	'/home/vagrawal/workspace/learn_rep'
 ]
 
 def write_job(cmds, path, name=None, cddir=None, tmpl=None):
@@ -71,7 +70,7 @@ def write_job(cmds, path, name=None, cddir=None, tmpl=None):
 
 
 
-def main(argv=None): # python scripts/create_job.py --script /home/fleeb/scripts/run.sh --template /home/fleeb/scripts/template.sh --dir /home/fleeb/workspace/gh-projects/hybrid/ --gpu 1 --mem 64 --cpu 4 --array --pull --gpu-names V100-32 --bid 1800 --avoid g048
+def main(argv=None): # python scripts/create_job.py --script /home/vagrawal/scripts/run.sh --template /home/vagrawal/scripts/template.sh --dir /home/vagrawal/workspace/gh-projects/hybrid/ --gpu 1 --mem 64 --cpu 4 --array --pull --gpu-names V100-32 --bid 1800 --avoid g048
 	parser = argparse.ArgumentParser(description='Create a submission script for the cluster')
 	parser.add_argument('--name', type=str, default=None,
 	                    help='Name of job')
@@ -132,7 +131,7 @@ def main(argv=None): # python scripts/create_job.py --script /home/fleeb/scripts
 
 	parser.add_argument('--dir', type=str, default=None,
 	                    help='path to change to before executing job')
-	parser.add_argument('--root', type=str, default='/home/fleeb/jobs',
+	parser.add_argument('--root', type=str, default='/home/vagrawal/jobs',
 	                    help='path to jobs folder')
 
 
