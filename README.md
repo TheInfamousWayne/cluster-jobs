@@ -41,9 +41,19 @@ The unbuffer part is optional
 * **template.sh**
 contains the new and updated/modified environment variables.
 * **create_job.py**
-responsible for creating jobs and submitting them. It takes each line from run.sh and create a job for it. 
+responsible for creating jobs and submitting them. It takes each line from run.sh and create a job for it. This also pulls all the git-repos that you mention [here](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/create_job.py#L49) before submitting your jobs.
 
-You just have to run this create_job.py file, with the required arguments to handle everything. It runs on python3.
+You just have to run this **create_job.py** file, with the required arguments to handle everything. 
+It runs on python3.
+
+To run it, a sample command could be
+	
+	python3 /home/vagrawal/cluster-jobs/create_job.py --script /home/vagrawal/cluster-jobs/run.sh --template /home/vagrawal/cluster-jobs/template.sh --dir /home/vagrawal/ --gpu 2 --mem 64 --cpu 4 --array --pull --gpu-names V100-32 --bid 1800 --avoid g048
+
+* **--dir** terminal goes to this folder and submits your jobs from here. This acts as "pwd"
+
+For information on other tags, check out the argument parser in **create_job.py**
+	
 
 
 
