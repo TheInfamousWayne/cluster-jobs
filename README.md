@@ -54,6 +54,7 @@ To run this submission script, this sample command could be
 For information on other tags, check out the [argument parser](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/create_job.py#L74) in **create_job.py**
 
 ### Important
+
 If your project needs to activate a virtual environment, it is suggested to activate it before running the submission script. (create_job.py)
 	
 
