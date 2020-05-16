@@ -50,7 +50,7 @@ To run it, a sample command could be
 	
 	python3 /home/vagrawal/cluster-jobs/create_job.py --script /home/vagrawal/cluster-jobs/run.sh --template /home/vagrawal/cluster-jobs/template.sh --dir /home/vagrawal/ --gpu 2 --mem 64 --cpu 4 --array --pull --gpu-names V100-32 --bid 1800 --avoid g048
 
-* **--dir** terminal goes to this folder and submits your jobs from here. This acts as "pwd"
+* **--dir** the jobs are submitted from this folder. This acts as the "pwd" (present working directory)
 
 For information on other tags, check out the [argument parser](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/create_job.py#L74) in **create_job.py**
 	
