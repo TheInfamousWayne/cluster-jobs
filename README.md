@@ -63,6 +63,7 @@ To login to the cluster,
 
 To load cuda,
 	$module load cuda/10.2
+	
 You need to load these modules every time you open a new terminal and activate your env.
 
 
