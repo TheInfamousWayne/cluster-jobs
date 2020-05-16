@@ -21,7 +21,7 @@ There are three folders of interest. (There could be more if your codebase is on
 
 * “cluster-jobs”
 * git pull all the latest changes (on the cluster)
-* Before submitting any job, make sure you have a “~/jobs” folder on your 
+* Before submitting any job, make sure you have a “~/jobs” folder on your cluster
 
 
 ### Data & Files
@@ -36,13 +36,16 @@ There are three folders of interest. (There could be more if your codebase is on
 In cluster-jobs folder, you have three files.
 
 * run.sh 
+
 contains the python commands → (unbuffer) python file_name.py 
 The unbuffer part is optional
 
 * template.sh
+
 contains the new and updated/modified environment variables.
 
 * create_job.py
+
 responsible for creating jobs and submitting them. It takes each line from run.sh and create a job for it. 
 
 You just have to run this create_job.py file, with the required arguments to handle everything. It runs on python3.
