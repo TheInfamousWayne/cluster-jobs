@@ -45,7 +45,7 @@ responsible for creating jobs and submitting them. It takes each line from run.s
 You just have to run this **create_job.py** file, with the required arguments to handle everything. 
 It runs on python3.
 
-To run it, a sample command could be
+To run it, this sample command could be
 	
 	python3 /home/vagrawal/cluster-jobs/create_job.py --script /home/vagrawal/cluster-jobs/run.sh --template /home/vagrawal/cluster-jobs/template.sh --dir /home/vagrawal/ --gpu 2 --mem 64 --cpu 4 --array --pull --gpu-names V100-32 --bid 1800 --avoid g048
 
