@@ -52,7 +52,7 @@ To run it, a sample command could be
 
 * **--dir** terminal goes to this folder and submits your jobs from here. This acts as "pwd"
 
-For information on other tags, check out the argument parser in **create_job.py**
+For information on other tags, check out the [argument parser](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/create_job.py#L74) in **create_job.py**
 	
 
 
