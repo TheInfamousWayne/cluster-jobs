@@ -40,19 +40,31 @@ contains the python commands to run ("unbuffer" is optional) → (unbuffer) pyth
 * **[template.sh](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/template.sh)**
 contains the new and updated/modified environment variables.
 * **[create_job.py](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/create_job.py)**
-responsible for creating jobs and submitting them. It takes each line from run.sh and create a job for it. This also pulls all the git-repos that you mention [here](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/create_job.py#L49) before submitting your jobs.
+this is the **submission script**. it's responsible for creating jobs and submitting them. It takes each line from run.sh and create a job for it. This also pulls all the git-repos that you mention [here](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/create_job.py#L49) before submitting your jobs.
 
 You just have to run this **create_job.py** file, with the required arguments to handle everything. 
 It runs on python3.
 
-To run it, this sample command could be
+To run this submission script, this sample command could be
 	
 	python3 /home/vagrawal/cluster-jobs/create_job.py --script /home/vagrawal/cluster-jobs/run.sh --template /home/vagrawal/cluster-jobs/template.sh --dir /home/vagrawal/ --gpu 2 --mem 64 --cpu 4 --array --pull --gpu-names V100-32 --bid 1800 --avoid g048
 
 * **--dir** the jobs are submitted from this folder. This becomes the "pwd" (present working directory).
 
 For information on other tags, check out the [argument parser](https://gitlab.tuebingen.mpg.de/vagrawal/cluster-jobs/-/blob/master/create_job.py#L74) in **create_job.py**
+
+If your project needs to activate a virtual environment, it is suggested to activate it before running the submission script. (create_job.py)
 	
+
+### Miscellaneous
+
+* To login to the cluster,
+	$ssh username@login.cluster.is.localnet
+
+* To load cuda,
+	$module load cuda/10.2
+You need to load these modules every time you open a new terminal and activate your env.
+
 
 
 
