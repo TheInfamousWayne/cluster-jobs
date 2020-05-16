@@ -38,10 +38,8 @@ In cluster-jobs folder, you have three files.
 * **run.sh**
 contains the python commands → (unbuffer) python file_name.py 
 The unbuffer part is optional
-
 * **template.sh**
 contains the new and updated/modified environment variables.
-
 * **create_job.py**
 responsible for creating jobs and submitting them. It takes each line from run.sh and create a job for it. 
 
