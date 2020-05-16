@@ -58,12 +58,10 @@ If your project needs to activate a virtual environment, it is suggested to acti
 
 ### Miscellaneous
 
-* To login to the cluster,
-
+To login to the cluster,
 	$ssh username@login.cluster.is.localnet
 
-* To load cuda,
-
+To load cuda,
 	$module load cuda/10.2
 You need to load these modules every time you open a new terminal and activate your env.
 
