@@ -1,6 +1,10 @@
 
 ### 0
 
+unbuffer python hybrid.py n/gan n/double n/3dshapes
+
+unbuffer python hybrid.py n/gan n/adain-dec n/3dshapes
+
 #unbuffer python hybrid.py n/fdwae n/double n/3dshapes --model.prob 0.1
 #
 #unbuffer python hybrid.py n/fdwae n/double n/3dshapes --model.latent_reg_wt 0 --model.prob 0.1
